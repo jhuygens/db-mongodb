@@ -90,7 +90,6 @@ func (u Users) GetByEmail(email string) (*users.User, error) {
 		return nil, err
 	}
 	user := users.User{
-		ID:               usr.ID,
 		Email:            usr.Email,
 		Password:         usr.Password,
 		AppName:          usr.AppName,
@@ -104,7 +103,6 @@ func (u Users) GetByEmail(email string) (*users.User, error) {
 		user.RedirectURLs = append(
 			user.RedirectURLs,
 			users.RedirectURL{
-				ID:          url.ID,
 				URL:         url.URL,
 				Description: url.Description,
 				CreatedAt:   url.CreatedAt,
@@ -139,7 +137,6 @@ func (u Users) GetByClientID(clientID string) (*users.User, error) {
 		return nil, err
 	}
 	user := users.User{
-		ID:               usr.ID,
 		Email:            usr.Email,
 		Password:         usr.Password,
 		AppName:          usr.AppName,
@@ -153,7 +150,6 @@ func (u Users) GetByClientID(clientID string) (*users.User, error) {
 		user.RedirectURLs = append(
 			user.RedirectURLs,
 			users.RedirectURL{
-				ID:          url.ID,
 				URL:         url.URL,
 				Description: url.Description,
 				CreatedAt:   url.CreatedAt,

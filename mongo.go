@@ -2,9 +2,9 @@ package mongodb
 
 import (
 	"context"
-	"log"
 
 	"github.com/jgolang/config"
+	"github.com/jgolang/log"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
