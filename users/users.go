@@ -68,10 +68,16 @@ func (u Users) Delete(userID int64) error {
 // UpdateCurrentSecretKey doc
 func (u Users) UpdateCurrentSecretKey(clientID, secretKey string) error {
 	collection := client.Database(config.GetString("database.name")).Collection(config.GetString("database.collections.users"))
+	filter := bson.D{primitive.E{Key: "client_id", Value: clientID}}
+	update := bson.M{
+		"$set": bson.M{
+			"current_secret_key": secretKey,
+		},
+	}
 	result, err := collection.UpdateOne(
 		context.Background(),
-		bson.D{primitive.E{Key: "client_id", Value: clientID}},
-		bson.D{primitive.E{Key: "current_secret_key", Value: secretKey}},
+		filter,
+		update,
 	)
 	if err != nil {
 		return err
@@ -115,10 +121,17 @@ func (u Users) GetByEmail(email string) (*users.User, error) {
 // UpdateToken doc ...
 func (u Users) UpdateToken(clientID, token, refreshToken string) error {
 	collection := client.Database(config.GetString("database.name")).Collection(config.GetString("database.collections.users"))
+	filter := bson.D{primitive.E{Key: "client_id", Value: clientID}}
+	update := bson.M{
+		"$set": bson.M{
+			"token":         token,
+			"refresh_token": refreshToken,
+		},
+	}
 	result, err := collection.UpdateOne(
 		context.Background(),
-		bson.D{primitive.E{Key: "client_id", Value: clientID}},
-		bson.D{primitive.E{Key: "token", Value: token}, primitive.E{Key: "refresh_token", Value: refreshToken}},
+		filter,
+		update,
 	)
 	if err != nil {
 		return err
